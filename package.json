@@ -1,0 +1,19 @@
+{
+  "name": "figo",
+  "module": "index.ts",
+  "scripts": {
+    "start": "bun run index.ts"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "^1.2.18",
+    "@types/figlet": "^1.7.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "bun": "^1.2.18",
+    "figlet": "^1.8.1"
+  }
+}
