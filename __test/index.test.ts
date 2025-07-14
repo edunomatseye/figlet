@@ -47,3 +47,7 @@ test("unlike in jest", () => {
     expect(Date.now).toBe(OriginalDate.now);
   }
 });
+
+test("Runtime behaviour of bun:test", () => {
+  expect(process.env.NODE_ENV).toBe("test");
+});
