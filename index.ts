@@ -1,4 +1,4 @@
-import figlet from "figlet";
+//import figlet from "figlet";
 
 // const server = Bun.serve({
 //   port: 3000,
@@ -87,7 +87,8 @@ export default {
 
     if (url.pathname === "/") {
       return new Response(
-        figlet.textSync("Hello World!", { font: "Standard" }),
+        //figlet.textSync("Hello World!", { font: "Standard" }),
+        "Hello World!",
         {
           headers: { "Content-Type": "text/plain" },
         }

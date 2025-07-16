@@ -1,5 +1,5 @@
 {
-  "name": "figo",
+  "name": "figlet-worker",
   "module": "index.ts",
   "scripts": {
     "start": "wrangler dev",
