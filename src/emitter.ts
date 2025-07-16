@@ -1,4 +1,4 @@
-class EventEmitter extends EventTarget {
+export class EventEmitter extends EventTarget {
   constructor(private name: string) {
     super();
     this.name = name;
@@ -23,7 +23,7 @@ class EventEmitter extends EventTarget {
   }
 }
 
-class CustomEventEmitter {
+export class CustomEventEmitter {
   private events: Map<string, ((event: CustomEvent) => void)[]>;
   constructor() {
     this.events = new Map();
@@ -34,11 +34,13 @@ class CustomEventEmitter {
       this.events.set(eventName, []);
     }
     this.events.get(eventName)?.push(callback);
-    return () => this.off(eventName, callback);
+    return () => {
+      this.off(eventName, callback);
+    };
   }
 
   off(eventName: string, callback: (event: CustomEvent) => void) {
-    return this.events.get(eventName)?.filter((cb) => cb !== callback);
+    return this.events.get(eventName)?.pop();
   }
 
   emit(eventName: string, ...data: any[]) {
