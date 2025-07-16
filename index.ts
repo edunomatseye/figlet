@@ -3,7 +3,13 @@ import { serve } from "bun";
 
 const server = serve({
   port: 3000,
-  fetch(req) {
+  fetch(req, server) {
+    if (server.upgrade(req)) {
+      console.log("Upgrade successful");
+      return new Response("Upgrade successful");
+    }
+    return new Response("Upgrade failed", { status: 505 });
+
     const url = new URL(req.url);
     if (url.pathname === "/") {
       return new Response(
@@ -50,6 +56,17 @@ const server = serve({
     },
   },
   development: true,
+  websocket: {
+    open(ws) {
+      console.log("WebSocket opened");
+    },
+    message(ws, message) {
+      console.log("WebSocket message", message);
+    },
+    close(ws) {
+      console.log("WebSocket closed");
+    },
+  },
 });
 
 console.log(`Server is running on ${server.url}`);
