@@ -1,4 +1,4 @@
-// import figlet from "figlet";
+import figlet from "figlet";
 
 // const server = Bun.serve({
 //   port: 3000,
@@ -84,6 +84,15 @@ export default {
     ctx: any // Fixed: Use 'any' for ExecutionContext to avoid TS error
   ): Promise<Response> {
     const url = new URL(request.url);
+
+    if (url.pathname === "/") {
+      return new Response(
+        figlet.textSync("Hello World!", { font: "Standard" }),
+        {
+          headers: { "Content-Type": "text/plain" },
+        }
+      );
+    }
 
     if (url.pathname === "/hello") {
       return new Response(
