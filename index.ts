@@ -1,7 +1,6 @@
 import figlet from "figlet";
-import { serve } from "bun";
 
-const server = serve({
+const server = Bun.serve({
   port: 3000,
   fetch(req, server) {
     if (server.upgrade(req)) {
