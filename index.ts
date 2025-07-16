@@ -3,11 +3,11 @@ import figlet from "figlet";
 const server = Bun.serve({
   port: 3000,
   fetch(req, server) {
-    if (server.upgrade(req)) {
-      console.log("Upgrade successful");
-      return new Response("Upgrade successful");
-    }
-    return new Response("Upgrade failed", { status: 505 });
+    // if (server.upgrade(req)) {
+    //   console.log("Upgrade successful");
+    //   return new Response("Upgrade successful");
+    // }
+    // return new Response("Upgrade failed", { status: 505 });
 
     const url = new URL(req.url);
     if (url.pathname === "/") {
