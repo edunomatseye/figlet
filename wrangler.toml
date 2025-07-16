@@ -1,5 +1,5 @@
 # wrangler.toml
-name = "giflet"
+name = "figlet"
 main = "dist/index.js"
 compatibility_date = "2025-05-01" # Always use a recent date
 compatibility_flags = ["nodejs_compat"] # If you need some Node.js built-ins
