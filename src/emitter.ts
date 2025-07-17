@@ -48,3 +48,9 @@ export class CustomEventEmitter {
     this.events.get(eventName)?.forEach((cb) => cb(event));
   }
 }
+
+const buf = new ArrayBuffer(8);
+buf.byteLength; // => 8
+
+const slice = buf.slice(0, 4); // returns new ArrayBuffer
+slice.byteLength; // => 4
