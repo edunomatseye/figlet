@@ -110,4 +110,36 @@ export default {
 
     return new Response("Not Found", { status: 404 });
   },
+  routes: {
+    "/": (req: Request) => {
+      return new Response(
+        figlet.textSync("Hello World! Olowo baba-- routes", {
+          font: "Standard",
+        }),
+        {
+          headers: { "Content-Type": "text/plain" },
+        }
+      );
+    },
+    "/users": {
+      GET: (req: Request) => {
+        return new Response(JSON.stringify({ message: "Hello World!" }), {
+          headers: { "Content-Type": "application/json" },
+        });
+      },
+      POST: async (req: Request) => {
+        const body = await req.json();
+        return new Response(JSON.stringify({ message: "Hello World!" }), {
+          headers: { "Content-Type": "application/json" },
+        });
+      },
+    },
+    "/users/:id": (req: Request) => {
+      const url = new URL(req.url);
+      const { id } = url.pathname;
+      return new Response(JSON.stringify({ message: "Hello World!", id }), {
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+  },
 };
