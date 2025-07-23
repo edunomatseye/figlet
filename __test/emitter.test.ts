@@ -1,6 +1,9 @@
 import { describe, it, expect, jest, beforeEach } from "bun:test";
 // Import the emitter classes
-import { EventEmitter, CustomEventEmitter } from "../src/emitter";
+import {
+  EventEmitter,
+  CustomEventEmitter,
+} from "../packages/figlet/src/emitter";
 
 beforeEach(() => {
   //   EventEmitter.prototype.addEventListener = jest.fn();
