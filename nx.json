@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "outputs": [
+        "{projectRoot}/dist"
+      ],
+      "cache": true
+    },
+    "deploy": {
+      "cache": true
+    }
+  },
+  "nxCloudId": "6880da546e2dcf0f75131836"
+}
