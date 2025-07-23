@@ -1,4 +1,4 @@
-//import figlet from "figlet";
+import figlet from "figlet";
 
 // const server = Bun.serve({
 //   port: 3000,
@@ -136,7 +136,8 @@ export default {
     },
     "/users/:id": (req: Request) => {
       const url = new URL(req.url);
-      const { id } = url.pathname;
+      const pathParts = url.pathname.split("/"); // ['', 'users', '123']
+      const id = pathParts[2];
       return new Response(JSON.stringify({ message: "Hello World!", id }), {
         headers: { "Content-Type": "application/json" },
       });
