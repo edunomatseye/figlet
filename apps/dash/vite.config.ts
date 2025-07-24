@@ -11,13 +11,13 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/apps/dashboard',
+  cacheDir: '../../node_modules/.vite/apps/dash',
   server: {
-    port: 4200,
+    port: 4300,
     host: 'localhost',
   },
   preview: {
-    port: 4200,
+    port: 4300,
     host: 'localhost',
   },
   plugins: [react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
@@ -26,22 +26,11 @@ export default defineConfig(() => ({
   //  plugins: [ nxViteTsPaths() ],
   // },
   build: {
-    outDir: '../../dist/apps/dashboard',
+    outDir: '../../dist/apps/dash',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
-    },
-  },
-  test: {
-    watch: false,
-    globals: true,
-    environment: 'jsdom',
-    include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    reporters: ['default'],
-    coverage: {
-      reportsDirectory: '../../coverage/apps/dashboard',
-      provider: 'v8' as const,
     },
   },
 }));
