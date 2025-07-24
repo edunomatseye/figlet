@@ -1,12 +1,11 @@
-import { PrismaClient } from '../generated/prisma';
-
+import { PrismaClient } from '../generated/prisma/client.ts';
 const prisma = new PrismaClient();
 
 async function main() {
   const user = await prisma.profile.create({
     data: {
-      name: 'Oloye',
-      email: 'oloye@prisma.io',
+      name: 'Omare',
+      email: 'omare@prisma.io',
     },
   });
   console.log(user);
