@@ -9,6 +9,11 @@ generator client {
   importFileExtension    = "ts"
 }
 
+generator drizzle {
+  provider = "drizzle-prisma-generator"
+  output   = "../drizzle" // Where to put generated Drizle tables
+}
+
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
