@@ -8,6 +8,19 @@ export const Route = createRootRoute({
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>{' '}
+        <Link to="/project" className="[&.active]:font-bold">
+          Project
+        </Link>{' '}
+        <Link
+          to="/posts/$postId"
+          params={{ postId: '4' }}
+          search={{
+            q: 'test',
+          }}
+          className="[&.active]:font-bold"
+        >
+          Post 4
+        </Link>{' '}
         <Link to="/about" className="[&.active]:font-bold">
           About
         </Link>
