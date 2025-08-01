@@ -13,6 +13,7 @@ import { Route as ProjectRouteImport } from './routes/project'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
+import { Route as PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport } from './routes/posts.{-$categoryId}.{-$slugId}'
 
 const ProjectRoute = ProjectRouteImport.update({
   id: '/project',
@@ -34,18 +35,26 @@ const PostsPostIdRoute = PostsPostIdRouteImport.update({
   path: '/posts/$postId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PostsChar123CategoryIdChar125Char123SlugIdChar125Route =
+  PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport.update({
+    id: '/posts/{-$categoryId}/{-$slugId}',
+    path: '/posts/{-$categoryId}/{-$slugId}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +62,30 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/project' | '/posts/$postId'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/project'
+    | '/posts/$postId'
+    | '/posts/{-$categoryId}/{-$slugId}'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/project' | '/posts/$postId'
-  id: '__root__' | '/' | '/about' | '/project' | '/posts/$postId'
+  to:
+    | '/'
+    | '/about'
+    | '/project'
+    | '/posts/$postId'
+    | '/posts/{-$categoryId}/{-$slugId}'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/project'
+    | '/posts/$postId'
+    | '/posts/{-$categoryId}/{-$slugId}'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +93,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ProjectRoute: typeof ProjectRoute
   PostsPostIdRoute: typeof PostsPostIdRoute
+  PostsChar123CategoryIdChar125Char123SlugIdChar125Route: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/posts/{-$categoryId}/{-$slugId}': {
+      id: '/posts/{-$categoryId}/{-$slugId}'
+      path: '/posts/{-$categoryId}/{-$slugId}'
+      fullPath: '/posts/{-$categoryId}/{-$slugId}'
+      preLoaderRoute: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +141,8 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ProjectRoute: ProjectRoute,
   PostsPostIdRoute: PostsPostIdRoute,
+  PostsChar123CategoryIdChar125Char123SlugIdChar125Route:
+    PostsChar123CategoryIdChar125Char123SlugIdChar125Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
