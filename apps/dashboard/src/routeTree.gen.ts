@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VueFlatRouteImport } from './routes/vue-flat'
+import { Route as TableRouteImport } from './routes/table'
 import { Route as ProjectRouteImport } from './routes/project'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as SettingsRouteRouteImport } from './routes/settings/route'
@@ -26,6 +27,11 @@ import { Route as PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport }
 const VueFlatRoute = VueFlatRouteImport.update({
   id: '/vue-flat',
   path: '/vue-flat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TableRoute = TableRouteImport.update({
+  id: '/table',
+  path: '/table',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectRoute = ProjectRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
+  '/table': typeof TableRoute
   '/vue-flat': typeof VueFlatRoute
   '/react': typeof FrameworkReactRoute
   '/vue': typeof FrameworkVueRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
+  '/table': typeof TableRoute
   '/vue-flat': typeof VueFlatRoute
   '/react': typeof FrameworkReactRoute
   '/vue': typeof FrameworkVueRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
+  '/table': typeof TableRoute
   '/vue-flat': typeof VueFlatRoute
   '/_framework/react': typeof FrameworkReactRoute
   '/_framework/vue': typeof FrameworkVueRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/about'
     | '/project'
+    | '/table'
     | '/vue-flat'
     | '/react'
     | '/vue'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/project'
+    | '/table'
     | '/vue-flat'
     | '/react'
     | '/vue'
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/about'
     | '/project'
+    | '/table'
     | '/vue-flat'
     | '/_framework/react'
     | '/_framework/vue'
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   SettingsRouteRoute: typeof SettingsRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   ProjectRoute: typeof ProjectRoute
+  TableRoute: typeof TableRoute
   VueFlatRoute: typeof VueFlatRoute
   PostsPostIdRoute: typeof PostsPostIdRoute
   PostsChar123CategoryIdChar125Char123SlugIdChar125Route: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/vue-flat'
       fullPath: '/vue-flat'
       preLoaderRoute: typeof VueFlatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/table': {
+      id: '/table'
+      path: '/table'
+      fullPath: '/table'
+      preLoaderRoute: typeof TableRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/project': {
@@ -320,6 +340,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRouteRoute: SettingsRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   ProjectRoute: ProjectRoute,
+  TableRoute: TableRoute,
   VueFlatRoute: VueFlatRoute,
   PostsPostIdRoute: PostsPostIdRoute,
   PostsChar123CategoryIdChar125Char123SlugIdChar125Route:
