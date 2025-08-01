@@ -4,7 +4,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 import path from 'node:path'; // Use 'node:' prefix for built-in modules in ESM
 import { fileURLToPath } from 'node:url'; // Function to convert URL to file path
-import { tanstackRouter } from '@tanstack/router-plugin/dist/esm/vite';
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
