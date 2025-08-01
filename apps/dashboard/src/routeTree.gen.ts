@@ -11,7 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProjectRouteImport } from './routes/project'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as SettingsRouteRouteImport } from './routes/settings/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SettingsIndexRouteImport } from './routes/settings/index'
+import { Route as SettingsXRouteImport } from './routes/settings/x'
+import { Route as SettingsFbRouteImport } from './routes/settings/fb'
 import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
 import { Route as PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport } from './routes/posts.{-$categoryId}.{-$slugId}'
 
@@ -25,10 +29,30 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRouteRoute = SettingsRouteRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsIndexRoute = SettingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SettingsRouteRoute,
+} as any)
+const SettingsXRoute = SettingsXRouteImport.update({
+  id: '/x',
+  path: '/x',
+  getParentRoute: () => SettingsRouteRoute,
+} as any)
+const SettingsFbRoute = SettingsFbRouteImport.update({
+  id: '/fb',
+  path: '/fb',
+  getParentRoute: () => SettingsRouteRoute,
 } as any)
 const PostsPostIdRoute = PostsPostIdRouteImport.update({
   id: '/posts/$postId',
@@ -44,9 +68,13 @@ const PostsChar123CategoryIdChar125Char123SlugIdChar125Route =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/settings/fb': typeof SettingsFbRoute
+  '/settings/x': typeof SettingsXRoute
+  '/settings/': typeof SettingsIndexRoute
   '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRoutesByTo {
@@ -54,23 +82,34 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/settings/fb': typeof SettingsFbRoute
+  '/settings/x': typeof SettingsXRoute
+  '/settings': typeof SettingsIndexRoute
   '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/project': typeof ProjectRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/settings/fb': typeof SettingsFbRoute
+  '/settings/x': typeof SettingsXRoute
+  '/settings/': typeof SettingsIndexRoute
   '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/settings'
     | '/about'
     | '/project'
     | '/posts/$postId'
+    | '/settings/fb'
+    | '/settings/x'
+    | '/settings/'
     | '/posts/{-$categoryId}/{-$slugId}'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -78,18 +117,26 @@ export interface FileRouteTypes {
     | '/about'
     | '/project'
     | '/posts/$postId'
+    | '/settings/fb'
+    | '/settings/x'
+    | '/settings'
     | '/posts/{-$categoryId}/{-$slugId}'
   id:
     | '__root__'
     | '/'
+    | '/settings'
     | '/about'
     | '/project'
     | '/posts/$postId'
+    | '/settings/fb'
+    | '/settings/x'
+    | '/settings/'
     | '/posts/{-$categoryId}/{-$slugId}'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SettingsRouteRoute: typeof SettingsRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   ProjectRoute: typeof ProjectRoute
   PostsPostIdRoute: typeof PostsPostIdRoute
@@ -112,12 +159,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/settings/': {
+      id: '/settings/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof SettingsIndexRouteImport
+      parentRoute: typeof SettingsRouteRoute
+    }
+    '/settings/x': {
+      id: '/settings/x'
+      path: '/x'
+      fullPath: '/settings/x'
+      preLoaderRoute: typeof SettingsXRouteImport
+      parentRoute: typeof SettingsRouteRoute
+    }
+    '/settings/fb': {
+      id: '/settings/fb'
+      path: '/fb'
+      fullPath: '/settings/fb'
+      preLoaderRoute: typeof SettingsFbRouteImport
+      parentRoute: typeof SettingsRouteRoute
     }
     '/posts/$postId': {
       id: '/posts/$postId'
@@ -136,8 +211,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface SettingsRouteRouteChildren {
+  SettingsFbRoute: typeof SettingsFbRoute
+  SettingsXRoute: typeof SettingsXRoute
+  SettingsIndexRoute: typeof SettingsIndexRoute
+}
+
+const SettingsRouteRouteChildren: SettingsRouteRouteChildren = {
+  SettingsFbRoute: SettingsFbRoute,
+  SettingsXRoute: SettingsXRoute,
+  SettingsIndexRoute: SettingsIndexRoute,
+}
+
+const SettingsRouteRouteWithChildren = SettingsRouteRoute._addFileChildren(
+  SettingsRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SettingsRouteRoute: SettingsRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   ProjectRoute: ProjectRoute,
   PostsPostIdRoute: PostsPostIdRoute,
