@@ -9,7 +9,8 @@ function About() {
   const navigate = routeApi.useNavigate();
   return (
     <div className="p-2">
-      Hello from About! <br />
+      Hello from About Table!
+      <br />
       <button
         style={{
           marginTop: '10px',

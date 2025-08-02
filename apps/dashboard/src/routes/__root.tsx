@@ -22,7 +22,7 @@ export const Route = createRootRoute({
           Post 4
         </Link>{' '}
         <Link to="/about" className="[&.active]:font-bold">
-          About
+          About Table
         </Link>
       </div>
       <hr />
