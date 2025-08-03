@@ -1,4 +1,8 @@
-import { createFileRoute, getRouteApi } from '@tanstack/react-router';
+import {
+  createFileRoute,
+  getRouteApi,
+  useParams,
+} from '@tanstack/react-router';
 
 export const Route = createFileRoute('/about')({
   component: About,
@@ -7,6 +11,7 @@ export const Route = createFileRoute('/about')({
 function About() {
   const routeApi = getRouteApi('/about');
   const navigate = routeApi.useNavigate();
+  const params = useParams({ from: '/about' });
   return (
     <div className="p-2">
       Hello from About Table!
