@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/posts/$postId')({
+export const Route = createFileRoute('/posts/$postId/edit')({
   // In a loader
   loader: ({ params }) => fetchPost(params.postId),
   // Or in a component
@@ -12,8 +12,7 @@ function PostComponent() {
   const { postId } = Route.useParams();
   return (
     <div>
-      Post ID: {postId}
-      <Outlet />
+      Form Edit ID: {postId} <br />
     </div>
   );
 }

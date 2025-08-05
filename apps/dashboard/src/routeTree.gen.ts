@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VueFlatRouteImport } from './routes/vue-flat'
 import { Route as TableRouteImport } from './routes/table'
 import { Route as ProjectRouteImport } from './routes/project'
+import { Route as PostsRouteImport } from './routes/posts'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as SettingsRouteRouteImport } from './routes/settings/route'
 import { Route as FrameworkRouteRouteImport } from './routes/_framework/route'
@@ -23,6 +24,7 @@ import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
 import { Route as FrameworkVueRouteImport } from './routes/_framework/vue'
 import { Route as FrameworkReactRouteImport } from './routes/_framework/react'
 import { Route as PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport } from './routes/posts.{-$categoryId}.{-$slugId}'
+import { Route as PostsPostIdEditRouteImport } from './routes/posts.$postId.edit'
 
 const VueFlatRoute = VueFlatRouteImport.update({
   id: '/vue-flat',
@@ -37,6 +39,11 @@ const TableRoute = TableRouteImport.update({
 const ProjectRoute = ProjectRouteImport.update({
   id: '/project',
   path: '/project',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostsRoute = PostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -74,9 +81,9 @@ const SettingsFbRoute = SettingsFbRouteImport.update({
   getParentRoute: () => SettingsRouteRoute,
 } as any)
 const PostsPostIdRoute = PostsPostIdRouteImport.update({
-  id: '/posts/$postId',
-  path: '/posts/$postId',
-  getParentRoute: () => rootRouteImport,
+  id: '/$postId',
+  path: '/$postId',
+  getParentRoute: () => PostsRoute,
 } as any)
 const FrameworkVueRoute = FrameworkVueRouteImport.update({
   id: '/vue',
@@ -90,38 +97,47 @@ const FrameworkReactRoute = FrameworkReactRouteImport.update({
 } as any)
 const PostsChar123CategoryIdChar125Char123SlugIdChar125Route =
   PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport.update({
-    id: '/posts/{-$categoryId}/{-$slugId}',
-    path: '/posts/{-$categoryId}/{-$slugId}',
-    getParentRoute: () => rootRouteImport,
+    id: '/{-$categoryId}/{-$slugId}',
+    path: '/{-$categoryId}/{-$slugId}',
+    getParentRoute: () => PostsRoute,
   } as any)
+const PostsPostIdEditRoute = PostsPostIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => PostsPostIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/settings': typeof SettingsRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
   '/project': typeof ProjectRoute
   '/table': typeof TableRoute
   '/vue-flat': typeof VueFlatRoute
   '/react': typeof FrameworkReactRoute
   '/vue': typeof FrameworkVueRoute
-  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/settings/fb': typeof SettingsFbRoute
   '/settings/x': typeof SettingsXRoute
   '/settings/': typeof SettingsIndexRoute
+  '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
   '/project': typeof ProjectRoute
   '/table': typeof TableRoute
   '/vue-flat': typeof VueFlatRoute
   '/react': typeof FrameworkReactRoute
   '/vue': typeof FrameworkVueRoute
-  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/settings/fb': typeof SettingsFbRoute
   '/settings/x': typeof SettingsXRoute
   '/settings': typeof SettingsIndexRoute
+  '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRoutesById {
@@ -130,15 +146,17 @@ export interface FileRoutesById {
   '/_framework': typeof FrameworkRouteRouteWithChildren
   '/settings': typeof SettingsRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
   '/project': typeof ProjectRoute
   '/table': typeof TableRoute
   '/vue-flat': typeof VueFlatRoute
   '/_framework/react': typeof FrameworkReactRoute
   '/_framework/vue': typeof FrameworkVueRoute
-  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/settings/fb': typeof SettingsFbRoute
   '/settings/x': typeof SettingsXRoute
   '/settings/': typeof SettingsIndexRoute
+  '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 export interface FileRouteTypes {
@@ -147,6 +165,7 @@ export interface FileRouteTypes {
     | '/'
     | '/settings'
     | '/about'
+    | '/posts'
     | '/project'
     | '/table'
     | '/vue-flat'
@@ -156,11 +175,13 @@ export interface FileRouteTypes {
     | '/settings/fb'
     | '/settings/x'
     | '/settings/'
+    | '/posts/$postId/edit'
     | '/posts/{-$categoryId}/{-$slugId}'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/posts'
     | '/project'
     | '/table'
     | '/vue-flat'
@@ -170,6 +191,7 @@ export interface FileRouteTypes {
     | '/settings/fb'
     | '/settings/x'
     | '/settings'
+    | '/posts/$postId/edit'
     | '/posts/{-$categoryId}/{-$slugId}'
   id:
     | '__root__'
@@ -177,6 +199,7 @@ export interface FileRouteTypes {
     | '/_framework'
     | '/settings'
     | '/about'
+    | '/posts'
     | '/project'
     | '/table'
     | '/vue-flat'
@@ -186,6 +209,7 @@ export interface FileRouteTypes {
     | '/settings/fb'
     | '/settings/x'
     | '/settings/'
+    | '/posts/$postId/edit'
     | '/posts/{-$categoryId}/{-$slugId}'
   fileRoutesById: FileRoutesById
 }
@@ -194,11 +218,10 @@ export interface RootRouteChildren {
   FrameworkRouteRoute: typeof FrameworkRouteRouteWithChildren
   SettingsRouteRoute: typeof SettingsRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  PostsRoute: typeof PostsRouteWithChildren
   ProjectRoute: typeof ProjectRoute
   TableRoute: typeof TableRoute
   VueFlatRoute: typeof VueFlatRoute
-  PostsPostIdRoute: typeof PostsPostIdRoute
-  PostsChar123CategoryIdChar125Char123SlugIdChar125Route: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
 }
 
 declare module '@tanstack/react-router' {
@@ -222,6 +245,13 @@ declare module '@tanstack/react-router' {
       path: '/project'
       fullPath: '/project'
       preLoaderRoute: typeof ProjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts': {
+      id: '/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof PostsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -275,10 +305,10 @@ declare module '@tanstack/react-router' {
     }
     '/posts/$postId': {
       id: '/posts/$postId'
-      path: '/posts/$postId'
+      path: '/$postId'
       fullPath: '/posts/$postId'
       preLoaderRoute: typeof PostsPostIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof PostsRoute
     }
     '/_framework/vue': {
       id: '/_framework/vue'
@@ -296,10 +326,17 @@ declare module '@tanstack/react-router' {
     }
     '/posts/{-$categoryId}/{-$slugId}': {
       id: '/posts/{-$categoryId}/{-$slugId}'
-      path: '/posts/{-$categoryId}/{-$slugId}'
+      path: '/{-$categoryId}/{-$slugId}'
       fullPath: '/posts/{-$categoryId}/{-$slugId}'
       preLoaderRoute: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof PostsRoute
+    }
+    '/posts/$postId/edit': {
+      id: '/posts/$postId/edit'
+      path: '/edit'
+      fullPath: '/posts/$postId/edit'
+      preLoaderRoute: typeof PostsPostIdEditRouteImport
+      parentRoute: typeof PostsPostIdRoute
     }
   }
 }
@@ -334,17 +371,40 @@ const SettingsRouteRouteWithChildren = SettingsRouteRoute._addFileChildren(
   SettingsRouteRouteChildren,
 )
 
+interface PostsPostIdRouteChildren {
+  PostsPostIdEditRoute: typeof PostsPostIdEditRoute
+}
+
+const PostsPostIdRouteChildren: PostsPostIdRouteChildren = {
+  PostsPostIdEditRoute: PostsPostIdEditRoute,
+}
+
+const PostsPostIdRouteWithChildren = PostsPostIdRoute._addFileChildren(
+  PostsPostIdRouteChildren,
+)
+
+interface PostsRouteChildren {
+  PostsPostIdRoute: typeof PostsPostIdRouteWithChildren
+  PostsChar123CategoryIdChar125Char123SlugIdChar125Route: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
+}
+
+const PostsRouteChildren: PostsRouteChildren = {
+  PostsPostIdRoute: PostsPostIdRouteWithChildren,
+  PostsChar123CategoryIdChar125Char123SlugIdChar125Route:
+    PostsChar123CategoryIdChar125Char123SlugIdChar125Route,
+}
+
+const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FrameworkRouteRoute: FrameworkRouteRouteWithChildren,
   SettingsRouteRoute: SettingsRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  PostsRoute: PostsRouteWithChildren,
   ProjectRoute: ProjectRoute,
   TableRoute: TableRoute,
   VueFlatRoute: VueFlatRoute,
-  PostsPostIdRoute: PostsPostIdRoute,
-  PostsChar123CategoryIdChar125Char123SlugIdChar125Route:
-    PostsChar123CategoryIdChar125Char123SlugIdChar125Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
