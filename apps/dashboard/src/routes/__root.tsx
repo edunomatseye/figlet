@@ -24,6 +24,12 @@ export const Route = createRootRoute({
         <Link to="/about" className="[&.active]:font-bold">
           About Table
         </Link>
+        <Link
+          to="/posts/{-$categoryId}/{-$slugId}/$subcat"
+          params={{ subcat: 'hello', categoryId: undefined, slugId: undefined }}
+        >
+          {({ isActive }) => (isActive ? 'Active SubCat Post' : 'SubCat Post')}
+        </Link>
       </div>
       <hr />
       <Outlet />

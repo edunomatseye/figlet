@@ -4,7 +4,7 @@ import { PrismaBetterSQLite3 } from '@prisma/adapter-better-sqlite3';
 // If your Prisma file is located elsewhere, you can change the path
 import { PrismaClient } from '../../generated/prisma/client.ts';
 const adapter = new PrismaBetterSQLite3({
-  schema: '../../prisma/schema.prisma',
+  url: process.env['DATABASE_URL'] as string,
 });
 
 const prisma = new PrismaClient({ adapter });
