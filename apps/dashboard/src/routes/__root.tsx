@@ -8,7 +8,7 @@ export const Route = createRootRoute({
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>{' '}
-        <Link to="/project" className="[&.active]:font-bold">
+        <Link to="/project" className="[&.active]:font-bold" preload="intent">
           Project
         </Link>{' '}
         <Link
@@ -27,6 +27,7 @@ export const Route = createRootRoute({
         <Link
           to="/posts/{-$categoryId}/{-$slugId}/$subcat"
           params={{ subcat: 'hello', categoryId: undefined, slugId: undefined }}
+          preload="intent"
         >
           {({ isActive }) => (isActive ? 'Active SubCat Post' : 'SubCat Post')}
         </Link>
