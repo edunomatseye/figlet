@@ -23,8 +23,8 @@ import { Route as SettingsFbRouteImport } from './routes/settings/fb'
 import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
 import { Route as FrameworkVueRouteImport } from './routes/_framework/vue'
 import { Route as FrameworkReactRouteImport } from './routes/_framework/react'
-import { Route as PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport } from './routes/posts.{-$categoryId}.{-$slugId}'
 import { Route as PostsPostIdEditRouteImport } from './routes/posts.$postId.edit'
+import { Route as PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRouteImport } from './routes/posts.{-$categoryId}.{-$slugId}.$subcat'
 
 const VueFlatRoute = VueFlatRouteImport.update({
   id: '/vue-flat',
@@ -95,17 +95,17 @@ const FrameworkReactRoute = FrameworkReactRouteImport.update({
   path: '/react',
   getParentRoute: () => FrameworkRouteRoute,
 } as any)
-const PostsChar123CategoryIdChar125Char123SlugIdChar125Route =
-  PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport.update({
-    id: '/{-$categoryId}/{-$slugId}',
-    path: '/{-$categoryId}/{-$slugId}',
-    getParentRoute: () => PostsRoute,
-  } as any)
 const PostsPostIdEditRoute = PostsPostIdEditRouteImport.update({
   id: '/edit',
   path: '/edit',
   getParentRoute: () => PostsPostIdRoute,
 } as any)
+const PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute =
+  PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRouteImport.update({
+    id: '/{-$categoryId}/{-$slugId}/$subcat',
+    path: '/{-$categoryId}/{-$slugId}/$subcat',
+    getParentRoute: () => PostsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -122,7 +122,7 @@ export interface FileRoutesByFullPath {
   '/settings/x': typeof SettingsXRoute
   '/settings/': typeof SettingsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
+  '/posts/{-$categoryId}/{-$slugId}/$subcat': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -138,7 +138,7 @@ export interface FileRoutesByTo {
   '/settings/x': typeof SettingsXRoute
   '/settings': typeof SettingsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
+  '/posts/{-$categoryId}/{-$slugId}/$subcat': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -157,7 +157,7 @@ export interface FileRoutesById {
   '/settings/x': typeof SettingsXRoute
   '/settings/': typeof SettingsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/posts/{-$categoryId}/{-$slugId}': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
+  '/posts/{-$categoryId}/{-$slugId}/$subcat': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -176,7 +176,7 @@ export interface FileRouteTypes {
     | '/settings/x'
     | '/settings/'
     | '/posts/$postId/edit'
-    | '/posts/{-$categoryId}/{-$slugId}'
+    | '/posts/{-$categoryId}/{-$slugId}/$subcat'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -192,7 +192,7 @@ export interface FileRouteTypes {
     | '/settings/x'
     | '/settings'
     | '/posts/$postId/edit'
-    | '/posts/{-$categoryId}/{-$slugId}'
+    | '/posts/{-$categoryId}/{-$slugId}/$subcat'
   id:
     | '__root__'
     | '/'
@@ -210,7 +210,7 @@ export interface FileRouteTypes {
     | '/settings/x'
     | '/settings/'
     | '/posts/$postId/edit'
-    | '/posts/{-$categoryId}/{-$slugId}'
+    | '/posts/{-$categoryId}/{-$slugId}/$subcat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -324,19 +324,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrameworkReactRouteImport
       parentRoute: typeof FrameworkRouteRoute
     }
-    '/posts/{-$categoryId}/{-$slugId}': {
-      id: '/posts/{-$categoryId}/{-$slugId}'
-      path: '/{-$categoryId}/{-$slugId}'
-      fullPath: '/posts/{-$categoryId}/{-$slugId}'
-      preLoaderRoute: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125RouteImport
-      parentRoute: typeof PostsRoute
-    }
     '/posts/$postId/edit': {
       id: '/posts/$postId/edit'
       path: '/edit'
       fullPath: '/posts/$postId/edit'
       preLoaderRoute: typeof PostsPostIdEditRouteImport
       parentRoute: typeof PostsPostIdRoute
+    }
+    '/posts/{-$categoryId}/{-$slugId}/$subcat': {
+      id: '/posts/{-$categoryId}/{-$slugId}/$subcat'
+      path: '/{-$categoryId}/{-$slugId}/$subcat'
+      fullPath: '/posts/{-$categoryId}/{-$slugId}/$subcat'
+      preLoaderRoute: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRouteImport
+      parentRoute: typeof PostsRoute
     }
   }
 }
@@ -385,13 +385,13 @@ const PostsPostIdRouteWithChildren = PostsPostIdRoute._addFileChildren(
 
 interface PostsRouteChildren {
   PostsPostIdRoute: typeof PostsPostIdRouteWithChildren
-  PostsChar123CategoryIdChar125Char123SlugIdChar125Route: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125Route
+  PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute: typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute
 }
 
 const PostsRouteChildren: PostsRouteChildren = {
   PostsPostIdRoute: PostsPostIdRouteWithChildren,
-  PostsChar123CategoryIdChar125Char123SlugIdChar125Route:
-    PostsChar123CategoryIdChar125Char123SlugIdChar125Route,
+  PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute:
+    PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute,
 }
 
 const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)

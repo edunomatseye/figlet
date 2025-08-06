@@ -1,10 +1,14 @@
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { PrismaBetterSQLite3 } from '@prisma/adapter-better-sqlite3';
 // If your Prisma file is located elsewhere, you can change the path
-import { PrismaClient } from '../../generated/prisma/client.ts';
+import { PrismaClient } from '../../generated/prisma';
+const adapter = new PrismaBetterSQLite3({
+  schema: '../../prisma/schema.prisma',
+});
 
-const prisma = new PrismaClient();
-export const auth = betterAuth({
+const prisma = new PrismaClient({ adapter });
+export const auth: any = betterAuth({
   database: prismaAdapter(prisma, {
     provider: 'sqlite', // or "mysql", "postgresql", ...etc
   }),

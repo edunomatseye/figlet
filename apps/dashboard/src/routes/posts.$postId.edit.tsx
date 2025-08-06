@@ -13,6 +13,7 @@ function PostComponent() {
   return (
     <div>
       Form Edit ID: {postId} <br />
+      <Outlet />
     </div>
   );
 }
