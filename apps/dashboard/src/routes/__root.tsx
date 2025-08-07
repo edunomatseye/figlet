@@ -1,4 +1,9 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  Link,
+  MatchRoute,
+  Outlet,
+} from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 export const Route = createRootRoute({
@@ -23,11 +28,15 @@ export const Route = createRootRoute({
         </Link>{' '}
         <Link to="/about" className="[&.active]:font-bold">
           About Table
+          <MatchRoute to="/about" pending>
+            {(match) => <Spinner show={!!match} />}
+          </MatchRoute>
         </Link>
         <Link
           to="/posts/{-$categoryId}/{-$slugId}/$subcat"
           params={{ subcat: 'hello', categoryId: undefined, slugId: undefined }}
           preload="intent"
+          className="[&.active]:font-bold"
         >
           {({ isActive }) => (isActive ? 'Active SubCat Post' : 'SubCat Post')}
         </Link>
@@ -38,3 +47,7 @@ export const Route = createRootRoute({
     </>
   ),
 });
+
+function Spinner({ show }: { show: boolean }) {
+  return show ? <div>Loading...</div> : null;
+}

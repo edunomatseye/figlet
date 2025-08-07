@@ -18,6 +18,7 @@ import { Route as SettingsRouteRouteImport } from './routes/settings/route'
 import { Route as FrameworkRouteRouteImport } from './routes/_framework/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
+import { Route as Char123LocaleChar125CountryRouteImport } from './routes/{-$locale}.country'
 import { Route as SettingsXRouteImport } from './routes/settings/x'
 import { Route as SettingsFbRouteImport } from './routes/settings/fb'
 import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
@@ -70,6 +71,12 @@ const SettingsIndexRoute = SettingsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SettingsRouteRoute,
 } as any)
+const Char123LocaleChar125CountryRoute =
+  Char123LocaleChar125CountryRouteImport.update({
+    id: '/{-$locale}/country',
+    path: '/{-$locale}/country',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SettingsXRoute = SettingsXRouteImport.update({
   id: '/x',
   path: '/x',
@@ -120,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/settings/fb': typeof SettingsFbRoute
   '/settings/x': typeof SettingsXRoute
+  '/{-$locale}/country': typeof Char123LocaleChar125CountryRoute
   '/settings/': typeof SettingsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/{-$categoryId}/{-$slugId}/$subcat': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute
@@ -136,6 +144,7 @@ export interface FileRoutesByTo {
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/settings/fb': typeof SettingsFbRoute
   '/settings/x': typeof SettingsXRoute
+  '/{-$locale}/country': typeof Char123LocaleChar125CountryRoute
   '/settings': typeof SettingsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/{-$categoryId}/{-$slugId}/$subcat': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute
@@ -155,6 +164,7 @@ export interface FileRoutesById {
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/settings/fb': typeof SettingsFbRoute
   '/settings/x': typeof SettingsXRoute
+  '/{-$locale}/country': typeof Char123LocaleChar125CountryRoute
   '/settings/': typeof SettingsIndexRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/posts/{-$categoryId}/{-$slugId}/$subcat': typeof PostsChar123CategoryIdChar125Char123SlugIdChar125SubcatRoute
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/posts/$postId'
     | '/settings/fb'
     | '/settings/x'
+    | '/{-$locale}/country'
     | '/settings/'
     | '/posts/$postId/edit'
     | '/posts/{-$categoryId}/{-$slugId}/$subcat'
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '/posts/$postId'
     | '/settings/fb'
     | '/settings/x'
+    | '/{-$locale}/country'
     | '/settings'
     | '/posts/$postId/edit'
     | '/posts/{-$categoryId}/{-$slugId}/$subcat'
@@ -208,6 +220,7 @@ export interface FileRouteTypes {
     | '/posts/$postId'
     | '/settings/fb'
     | '/settings/x'
+    | '/{-$locale}/country'
     | '/settings/'
     | '/posts/$postId/edit'
     | '/posts/{-$categoryId}/{-$slugId}/$subcat'
@@ -222,6 +235,7 @@ export interface RootRouteChildren {
   ProjectRoute: typeof ProjectRoute
   TableRoute: typeof TableRoute
   VueFlatRoute: typeof VueFlatRoute
+  Char123LocaleChar125CountryRoute: typeof Char123LocaleChar125CountryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -288,6 +302,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/settings/'
       preLoaderRoute: typeof SettingsIndexRouteImport
       parentRoute: typeof SettingsRouteRoute
+    }
+    '/{-$locale}/country': {
+      id: '/{-$locale}/country'
+      path: '/{-$locale}/country'
+      fullPath: '/{-$locale}/country'
+      preLoaderRoute: typeof Char123LocaleChar125CountryRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/settings/x': {
       id: '/settings/x'
@@ -405,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectRoute: ProjectRoute,
   TableRoute: TableRoute,
   VueFlatRoute: VueFlatRoute,
+  Char123LocaleChar125CountryRoute: Char123LocaleChar125CountryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
