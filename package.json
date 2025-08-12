@@ -1,5 +1,5 @@
 {
-  "name": "worksp",
+  "name": "@worksp",
   "type": "module",
   "devDependencies": {
     "@nx/devkit": "21.3.3",

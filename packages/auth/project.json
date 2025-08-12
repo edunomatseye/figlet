@@ -1,5 +1,5 @@
 {
-  "name": "auth",
+  "name": "@worksp/auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/auth/src",
   "projectType": "library",

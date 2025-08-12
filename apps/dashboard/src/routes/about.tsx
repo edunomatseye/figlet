@@ -1,17 +1,32 @@
-import {
-  createFileRoute,
-  getRouteApi,
-  useParams,
-} from '@tanstack/react-router';
+import { createFileRoute, getRouteApi, redirect } from '@tanstack/react-router';
+import { z } from 'zod';
+import { getSession } from '../../../../packages/auth/src/'; // Adjust the import path as needed
 
 export const Route = createFileRoute('/about')({
+  validateSearch: z.object({
+    name: z.string().optional(),
+  }),
+  beforeLoad: async ({ search }) => {
+    const session = await getSession();
+    if (!session) {
+      redirect({ to: '/project' });
+    }
+    return {
+      session,
+    };
+  },
+  loader: async ({ context }) => {
+    return {
+      session: context.session,
+    };
+  },
   component: About,
 });
 
 function About() {
   const routeApi = getRouteApi('/about');
   const navigate = routeApi.useNavigate();
-  const params = useParams({ from: '/about' });
+  const params = Route.useParams();
   return (
     <div className="p-2">
       Hello from About Table!
