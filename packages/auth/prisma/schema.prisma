@@ -1,6 +1,7 @@
+
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider        = "prisma-client"
+  output          = "../generated/prisma"
   previewFeatures = ["driverAdapters", "queryCompiler"]
 
   // Optional
@@ -12,7 +13,8 @@ generator client {
 
 generator drizzle {
   provider = "drizzle-prisma-generator"
-  output   = "../drizzle" // Where to put generated Drizle tables
+  output   = "../drizzle"
+  // Where to put generated Drizle tables
 }
 
 datasource db {
@@ -32,7 +34,7 @@ model Post {
   title     String
   content   String?
   published Boolean @default(false)
-  author    Profile    @relation(fields: [authorId], references: [id])
+  author    Profile @relation(fields: [authorId], references: [id])
   authorId  Int
 }
 

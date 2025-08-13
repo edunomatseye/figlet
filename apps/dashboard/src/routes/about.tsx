@@ -1,13 +1,18 @@
 import { createFileRoute, getRouteApi, redirect } from '@tanstack/react-router';
 import { z } from 'zod';
-import { getSession } from '../../../../packages/auth/src/'; // Adjust the import path as needed
+import { auth, authClient } from '../../../../packages/auth/src/'; // Adjust the import path as needed
+import { getHeaders } from 'better-auth/client';
 
 export const Route = createFileRoute('/about')({
   validateSearch: z.object({
     name: z.string().optional(),
   }),
   beforeLoad: async ({ search }) => {
-    const session = await getSession();
+    // const session = await authClient.signIn.email({
+    //   email: 'test@test.com',
+    //   password: '123456',
+    // });
+    const session = false;
     if (!session) {
       redirect({ to: '/project' });
     }
@@ -27,9 +32,10 @@ function About() {
   const routeApi = getRouteApi('/about');
   const navigate = routeApi.useNavigate();
   const params = Route.useParams();
+  const context = Route.useLoaderData();
   return (
     <div className="p-2">
-      Hello from About Table!
+      Hello from About Table! {context?.session?.data?.user.email}
       <br />
       <button
         style={{

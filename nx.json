@@ -1,6 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "nxCloudId": "688cd7c3dc5c68771c4e9570",
   "plugins": [
     {
       "plugin": "@nx/playwright/plugin",
