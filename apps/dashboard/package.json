@@ -2,9 +2,5 @@
   "name": "dashboard",
   "module": "index.ts",
   "type": "module",
-  "scripts": {
-    "dev": "nx serve",
-    "build": "nx vite:build",
-    "preview": "nx vite:preview"
-  }
+  "scripts": {}
 }
