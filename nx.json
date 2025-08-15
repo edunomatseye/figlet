@@ -1,12 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "plugins": [
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
-    },
+    { "plugin": "@nx/playwright/plugin", "options": { "targetName": "e2e" } },
     {
       "plugin": "@nx/vite/plugin",
       "options": {
@@ -53,13 +48,9 @@
         "linter": "none",
         "bundler": "vite"
       },
-      "component": {
-        "style": "css"
-      },
-      "library": {
-        "style": "css",
-        "linter": "none"
-      }
+      "component": { "style": "css" },
+      "library": { "style": "css", "linter": "none" }
     }
-  }
+  },
+  "nxCloudId": "689f6be6208cf06ccafc8d39"
 }
